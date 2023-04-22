@@ -1,0 +1,6 @@
+.**/build/
+**/.next/
+**/.cloud/
+**/node_modules/
+yarn.lock
+gateway/*

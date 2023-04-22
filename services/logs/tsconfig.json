@@ -1,0 +1,16 @@
+{
+  "extends": "@configs/typescript/adonis",
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules", ".build"],
+  "compilerOptions": {
+    "outDir": ".build",
+		"rootDir": "./",
+    "baseUrl": "./",
+    "paths": {
+      "App/*": ["./app/*"],
+      "Config/*": ["./config/*"],
+      "Contracts/*": ["./contracts/*"],
+      "Database/*": ["./database/*"]
+    }
+  }
+}

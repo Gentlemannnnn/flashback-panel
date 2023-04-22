@@ -1,0 +1,98 @@
+version: '3.8'
+
+services:
+
+  nginx-proxy:
+    image: nginxproxy/nginx-proxy
+    container_name: ${CONTAINERS_NAME_PREFIX}_reverse_proxy
+    ports:
+      - 80:80
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    networks:
+      - reverse_proxy
+
+  mongo-db:
+    image: mongo:latest
+    container_name: $CONTAINERS_NAME_PREFIX$MONGO_DB_SERVICE_NAME
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: $MONGO_DB_USER
+      MONGO_INITDB_ROOT_PASSWORD: $MONGO_DB_PASSWORD
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - mongo_db_network
+
+  gateway:
+    container_name: ${CONTAINERS_NAME_PREFIX}api_gateway
+    volumes:
+      - ./gateway:/etc/krakend
+    environment:
+      VIRTUAL_HOST: api.$PROJECT_DOMAIN
+      VIRTUAL_PORT: 8080
+      LOGS_SERVICE_URI: http://logs:3000
+      FC_OUT: out.json
+    networks:
+      - reverse_proxy
+
+  ###################################################
+  # CLIENTS
+  ###################################################
+  panel:
+    container_name: $CONTAINERS_NAME_PREFIX$PANEL_WORKSPACE_NAME
+    mem_limit: 2g
+    build:
+      target: serve-dev
+    environment:
+      VIRTUAL_HOST: panel.$PROJECT_DOMAIN
+      VIRTUAL_PORT: 3000
+      NEXT_PUBLIC_API_GATEWAY_URI: http://api.$PROJECT_DOMAIN
+      AUTH0_SECRET: $AUTH0_SECRET
+      AUTH0_ISSUER_BASE_URL: $AUTH0_ISSUER
+      AUTH0_BASE_URL: $PANEL_AUTH0_BASE_URL
+      AUTH0_CLIENT_ID: $PANEL_AUTH0_CLIENT_ID
+      AUTH0_CLIENT_SECRET: $PANEL_AUTH0_CLIENT_SECRET
+    volumes:
+      - ./node_modules:/home/node/app/node_modules
+      - ./$PANEL_WORKSPACE_PATH:/home/node/app/$PANEL_WORKSPACE_PATH
+      - ./$PANEL_WORKSPACE_PATH/node_modules:/home/node/app/$PANEL_WORKSPACE_PATH/node_modules
+    tty: true
+    networks:
+      - reverse_proxy
+    profiles:
+      - panel
+      - all
+      
+  ###################################################
+  # SERVICES
+  ###################################################
+
+  logs:
+    container_name: $CONTAINERS_NAME_PREFIX$LOGS_SERVICE_WORKSPACE_NAME
+    mem_limit: 1g
+    build:
+      target: serve-dev
+    restart: on-failure
+    environment:
+      VIRTUAL_HOST: LOGS.$PROJECT_DOMAIN
+      VIRTUAL_PORT: 3000
+      APP_KEY: $LOGS_SERVICE_APP_KEY
+      DB_DSN: $MONGO_DB_BASE_DSN/$LOGS_SERVICE_WORKSPACE_NAME$MONGO_CONNECTION_OPTIONS
+    volumes:
+      - ./node_modules:/home/node/app/node_modules
+      - ./$LOGS_SERVICE_WORKSPACE_PATH:/home/node/app/$LOGS_SERVICE_WORKSPACE_PATH
+      - ./$LOGS_SERVICE_WORKSPACE_PATH/node_modules:/home/node/app/$LOGS_SERVICE_WORKSPACE_PATH/node_modules
+    tty: true
+    networks:
+      - reverse_proxy
+      - mongo_db_network
+
+networks:
+  reverse_proxy:
+  mongo_db_network:
+
+volumes:
+  firebase_data:
+  mongodb_data:

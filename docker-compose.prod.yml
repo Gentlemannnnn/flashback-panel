@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  ###################################################
+  # TOOLS
+  ###################################################
+  gateway:
+    image: $DOCKER_REGISTRY_URI$DOCKER_IMAGE_PREFIX$GATEWAY_NAME:${DOCKER_IMAGE_VERSION}
+    build:
+      context: .
+      dockerfile: ./docker/krakend.Dockerfile
+
+  ###################################################
+  # CLIENTS
+  ###################################################
+  panel:
+    image: $DOCKER_REGISTRY_URI$DOCKER_IMAGE_APPS_PREFIX$PANEL_WORKSPACE_NAME:${DOCKER_IMAGE_VERSION}
+    build:
+      context: .
+      dockerfile: ./docker/app.Dockerfile
+      args:
+        WORKSPACE: $PANEL_WORKSPACE_NAME
+        WORKSPACE_PATH: $PANEL_WORKSPACE_PATH
+        NEXT_PUBLIC_API_GATEWAY_URI: https://google.fr
+
+  ###################################################
+  # SERVICES
+  ###################################################
+  logs:
+    image: $DOCKER_REGISTRY_URI$DOCKER_IMAGE_SERVICES_PREFIX$LOGS_SERVICE_WORKSPACE_NAME:${DOCKER_IMAGE_VERSION}
+    build:
+      context: .
+      dockerfile: ./docker/app.Dockerfile
+      args:
+        WORKSPACE: $SERVICES_WORKSPACE_PREFIX/$LOGS_SERVICE_WORKSPACE_NAME
+        WORKSPACE_PATH: $LOGS_SERVICE_WORKSPACE_PATH

@@ -1,0 +1,19 @@
+{
+	"$schema": "https://www.krakend.io/schema/v3.json",
+	"version": 3,
+	"name": "Flashback panel API Gateway",
+	"extra_config": {
+		"security/cors": {
+			"allow_origins": ["*"],
+			"expose_headers": ["Content-Length", "Content-Type"],
+			"allow_headers": ["Accept-Language", "Authorization", "Content-Type"],
+			"max_age": "12h",
+			"allow_methods": ["GET", "HEAD", "POST", "PUT", "OPTIONS"]
+		}
+	},
+	"timeout": "10000ms",
+	"cache_ttl": "300s",
+	"output_encoding": "json",
+	"port": 8080,
+	"endpoints": []
+}

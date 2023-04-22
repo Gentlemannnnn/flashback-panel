@@ -1,0 +1,13 @@
+{
+	"$schema": "https://json.schemastore.org/tsconfig",
+	"display": "Next",
+	"extends": "./base.json",
+	"compilerOptions": {
+		"jsx": "preserve",
+		"lib": ["dom", "dom.iterable", "esnext"],
+		"noEmit": true,
+		"module": "esnext",
+		"target": "es6",
+		"types": ["jest", "node", "@testing-library/jest-dom"]
+	}
+}

@@ -1,0 +1,29 @@
+{
+  "name": "@configs/eslint-config",
+  "version": "0.0.0",
+  "files": [
+    "next.js",
+    "adonis.js",
+    "server.js"
+  ],
+  "scripts": {
+    "show": "node ./adonis.js"
+  },
+  "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.43.0",
+    "@typescript-eslint/parser": "^5.43.0",
+    "eslint": "^8.27.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "eslint-config-next": "^13.0.3",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-adonis": "2.1.1",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jest": "^27.1.5",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.31.10",
+    "eslint-plugin-testing-library": "^5.9.1",
+    "lodash": "4.17.21"
+  }
+}

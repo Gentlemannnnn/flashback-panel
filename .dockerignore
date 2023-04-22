@@ -1,0 +1,14 @@
+.gitignore
+.gitlab-ci.yml
+**/.build
+**/.next
+**/out/
+**/.turbo
+**/.yarn-cache
+**/yarn-error.log
+.cloud
+node_modules
+**/node_modules
+README.md
+tsconfig.tsbuildinfo
+.git

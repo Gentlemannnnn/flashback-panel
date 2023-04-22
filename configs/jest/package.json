@@ -1,0 +1,7 @@
+{
+	"name": "@configs/jest",
+	"version": "0.0.0",
+	"files": [
+		"config.js"
+	]
+}

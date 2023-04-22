@@ -1,0 +1,37 @@
+{
+	"name": "@services/logs",
+	"version": "1.0.0",
+	"private": true,
+	"scripts": {
+		"dev": "node ace serve --watch",
+		"build": "node ace build --production",
+		"start": "node .build/server.js",
+		"lint": "eslint . --ext=.ts",
+		"format": "prettier --write .",
+		"container:test": "node ace test",
+		"test": "docker-compose -f ../../docker-compose.prod.yml -f ../../docker-compose.yml exec logs bash -c 'yarn workspace @services/logs run container:test'"
+	},
+	"devDependencies": {
+		"@adonisjs/assembler": "5.9.3",
+		"@configs/eslint-config": "*",
+		"@configs/typescript": "*",
+		"@japa/preset-adonis": "1.2.0",
+		"@japa/runner": "2.2.2",
+		"@types/lodash": "4.14.189",
+		"@types/proxy-addr": "2.0.0",
+		"@types/source-map-support": "0.5.6",
+		"pino-pretty": "9.1.1",
+		"typescript": "~4.9.3",
+		"youch": "3.2.2",
+		"youch-terminal": "2.1.5"
+	},
+	"dependencies": {
+		"@adonisjs/core": "^5.8.9",
+		"@adonisjs/repl": "^3.1.0",
+		"lodash": "4.17.21",
+		"mongoose": "6.7.2",
+		"proxy-addr": "2.0.7",
+		"reflect-metadata": "0.1.13",
+		"source-map-support": "0.5.21"
+	}
+}

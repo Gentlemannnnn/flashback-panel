@@ -1,0 +1,28 @@
+{
+  "extends": "@configs/typescript/next",
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules",
+    ".next",
+    "cypress"
+  ],
+  "compilerOptions": {
+    "jsx": "preserve",
+    "baseUrl": ".",
+    "paths": {
+      "components/*": [
+        "./components/*"
+      ],
+      "utils/*": [
+        "./utils/*"
+      ],
+      "features/*": [
+        "features/*"
+      ]
+    }
+  }
+}

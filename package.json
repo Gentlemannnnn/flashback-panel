@@ -1,0 +1,43 @@
+{
+	"name": "flashback_panel",
+	"version": "0.1.0",
+	"private": true,
+	"workspaces": [
+		"panel",
+		"services/*",
+		"scripts",
+		"configs/*"
+	],
+	"scripts": {
+		"clear:packages": "find . -type d -name '*node_modules*' -prune -exec rm -rf {} +",
+		"clean:install": "yarn clear:packages && yarn install",
+		"dev": "./scripts/dev.sh",
+		"watch:packages": "turbo run dev --filter=./packages/* --parallel",
+		"docker:publish": "./scripts/publish.sh",
+		"staging": "./scripts/deployment.sh staging",
+		"production": "./scripts/deployment.sh production",
+		"lint": "turbo run lint --parallel",
+		"format": "prettier --write \"**/*.{ts,tsx,md}\"",
+		"test": "infisical run -- turbo run test --parallel",
+		"prepare": "husky install"
+	},
+	"devDependencies": {
+		"husky": "^8.0.2",
+		"lint-staged": "~13.0.2",
+		"prettier": "~2.7.1",
+		"turbo": "~1.6.1"
+	},
+	"engines": {
+		"yarn": "1",
+		"node": "18"
+	},
+	"lint-staged": {
+		"**/*.{js,ts,jsx,tsx}": [
+			"eslint --fix"
+		],
+		"*.json": [
+			"prettier --write"
+		]
+	},
+	"packageManager": "yarn@1.22.19"
+}
