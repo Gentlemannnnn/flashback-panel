@@ -1,11 +1,11 @@
 import {
 	IconButton,
-	Menu,
-	MenuItem,
+	// Menu,
+	// MenuItem,
 	Button,
 	Tooltip,
 	Avatar,
-	styled,
+	// styled,
 	Grid,
 } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
@@ -16,13 +16,13 @@ import React from 'react';
 
 interface Props {
 	username: string;
-	avatar?: string;
+	// avatar?: string;
 }
 
 const pages = ['Logs', 'Users', 'COnfig'];
 // const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-const Navbar = ({ username, avatar }: Props) => (
+const Navbar = ({ username }: Props) => (
 	<AppBar
 		position="static"
 		style={{

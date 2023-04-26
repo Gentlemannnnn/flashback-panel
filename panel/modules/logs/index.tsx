@@ -322,6 +322,7 @@ const Logs = () => {
 				pageSize={5}
 				rowsPerPageOptions={[5]}
 				experimentalFeatures={{ newEditingApi: true }}
+				totalRows={rows.length}
 			/>
 		</Box>
 	);
