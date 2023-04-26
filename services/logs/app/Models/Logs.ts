@@ -27,4 +27,14 @@ const schema = new Schema<any>(
 	{ strict: false },
 );
 
+schema.set('toJSON', {
+	transform(_, ret) {
+		ret.id = ret._id;
+		delete ret._id;
+		delete ret.__v;
+		delete ret.__t;
+	},
+	virtuals: true,
+});
+
 export default mongoose.model<any>('logs', schema);
