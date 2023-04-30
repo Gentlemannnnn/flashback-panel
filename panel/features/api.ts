@@ -1,6 +1,7 @@
 import QueryString from 'qs';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { Query } from 'types/query';
+
 export const api = createApi({
 	reducerPath: 'api',
 	baseQuery: fetchBaseQuery({
@@ -9,7 +10,13 @@ export const api = createApi({
 	tagTypes: ['Logs'],
 	endpoints: builder => ({
 		getLogs: builder.query<
-			{ items: any[]; totalRows: number; page: number; totalPages: number },
+			{
+				items: any[];
+				totalRows: number;
+				page: number;
+				totalPages: number;
+				pageSize: number;
+			},
 			Query
 		>({
 			query: params => ({

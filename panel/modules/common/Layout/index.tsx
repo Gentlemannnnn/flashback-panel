@@ -20,10 +20,9 @@ interface Props {
 
 const Layout = ({ children }: Props) => {
 	const { user } = useUser();
-	console.log(user);
 	return (
 		<PageContainer>
-			<Navbar username={user!.name!} avatar={user?.picture} />
+			<Navbar username={user?.name || ''} avatar={user?.picture} />
 			{children}
 		</PageContainer>
 	);

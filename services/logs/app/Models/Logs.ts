@@ -1,7 +1,7 @@
 import mongoose, { Schema } from '@ioc:Mongoose';
 
 const FromToSchema = new Schema<any>({
-	id: { type: String, required: true },
+	id: { type: String, required: false },
 	sessionId: { type: String },
 	discordId: { type: String },
 	steamName: { type: String },
@@ -10,7 +10,7 @@ const FromToSchema = new Schema<any>({
 });
 
 const ItemSchema = new Schema<any>({
-	id: { type: String, required: true },
+	id: { type: String, required: false },
 	name: { type: String, required: true },
 });
 

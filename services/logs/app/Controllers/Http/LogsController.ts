@@ -15,11 +15,39 @@ export default class LogsController {
 				.skip((page - 1) * pageSize)
 				.limit(pageSize);
 			const totalRows = await LogsModel.count(filter);
+			const actions = await LogsModel.distinct('action');
+			const items = await LogsModel.distinct('item.name');
+			const columns = await LogsModel.aggregate([
+				{ $match: filter },
+				{ $project: { keys: { $objectToArray: '$$ROOT' } } },
+				{ $unwind: '$keys' },
+				{ $group: { _id: '$keys.k' } },
+			]).exec();
+			const excludesColumns = [
+				'_id',
+				'id',
+				'createdAt',
+				'updatedAt',
+				'__v',
+				'quantity',
+				'from',
+				'to',
+				'item',
+				'action',
+				'message',
+			];
 			return {
 				items: logs,
 				totalRows,
-				page,
+				page: Number(page),
 				totalPages: Math.ceil(totalRows / pageSize),
+				columns: columns
+					.map(key => key._id.toString())
+					.filter(key => !excludesColumns.includes(key)),
+				filterData: {
+					action: actions,
+					item: items,
+				},
 			};
 		} catch (error: any) {
 			const { name, message, statusCode } = error;

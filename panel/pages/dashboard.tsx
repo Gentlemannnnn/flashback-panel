@@ -9,13 +9,34 @@ const DashboardPage: NextPage = () => {
 	const [queryOptions, setQueryOptions] = React.useState<Query>({
 		sort: {},
 		filter: {},
+		page: 1,
+		pageSize: 50,
 	});
 
-	const { data = { page: 1, items: [], totalPages: 1, totalRows: 0 } } =
-		api.useGetLogsQuery(queryOptions);
+	const {
+		data = {
+			page: 1,
+			pageSize: 50,
+			items: [],
+			totalPages: 1,
+			totalRows: 0,
+			columns: [],
+			filterData: {},
+		},
+		isFetching,
+		isSuccess,
+	} = api.useGetLogsQuery(queryOptions);
 
-	return (
-		<Logs {...data} onFilterChange={(query: Query) => setQueryOptions(query)} />
+	return isSuccess ? (
+		<Logs
+			isLoading={isFetching}
+			{...data}
+			onFilterChange={(query: Query) =>
+				setQueryOptions(oldQueryOption => ({ ...oldQueryOption, ...query }))
+			}
+		/>
+	) : (
+		<span>...Loading</span>
 	);
 };
 
