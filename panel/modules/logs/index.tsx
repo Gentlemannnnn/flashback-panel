@@ -20,7 +20,6 @@ interface Props {
 	page: number;
 	pageSize: number;
 	totalRows: number;
-	// totalPages: number;
 	onFilterChange: (query: Query) => void;
 	isLoading: boolean;
 	filterData?: { [key: string]: string[] };
