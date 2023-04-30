@@ -15,5 +15,35 @@
 	"cache_ttl": "300s",
 	"output_encoding": "json",
 	"port": 8080,
-	"endpoints": []
+	"endpoints": [
+		{
+			"endpoint": "/logs",
+			"method": "POST",
+			"output_encoding": "no-op",
+			"backend": [
+				{
+					"url_pattern": "/logs",
+					"host": ["{{env "LOGS_SERVICE_URI"}}"],
+					"encoding": "no-op"
+				}
+			]
+		},
+		{
+			"endpoint": "/logs",
+			"method": "GET",
+			"output_encoding": "no-op",
+			"input_query_strings": ["*"],
+			"backend": [
+				{
+					"is_collection": true,
+					"mapping": {
+						"collection": "items"
+					},
+					"url_pattern": "/logs",
+					"host": ["{{env "LOGS_SERVICE_URI"}}"],
+					"encoding": "no-op"
+				}
+			]
+		}
+	]
 }

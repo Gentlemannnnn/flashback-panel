@@ -1,11 +1,11 @@
 import {
 	IconButton,
-	Menu,
-	MenuItem,
+	// Menu,
+	// MenuItem,
 	Button,
 	Tooltip,
 	Avatar,
-	styled,
+	// styled,
 	Grid,
 } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
@@ -16,7 +16,7 @@ import React from 'react';
 
 interface Props {
 	username: string;
-	avatar?: string;
+	avatar?: string | null;
 }
 
 const pages = ['Logs', 'Users', 'COnfig'];
@@ -80,7 +80,7 @@ const Navbar = ({ username, avatar }: Props) => (
 					<Box sx={{ flexGrow: 0 }} display="flex" paddingRight="1em">
 						<Tooltip title="Open settings">
 							<IconButton sx={{ p: 0 }}>
-								<Avatar alt={username} src="/static/images/avatar/2.jpg" />
+								<Avatar alt={username} src={avatar} />
 							</IconButton>
 						</Tooltip>
 					</Box>

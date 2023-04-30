@@ -1,3 +1,4 @@
+import { useUser } from '@auth0/nextjs-auth0';
 import { styled } from '@mui/material';
 import Box from '@mui/material/Box';
 import Navbar from 'components/Navbar';
@@ -17,11 +18,14 @@ interface Props {
 	children: React.ReactNode;
 }
 
-const Layout = ({ children }: Props) => (
-	<PageContainer>
-		<Navbar username="aaron" />
-		{children}
-	</PageContainer>
-);
+const Layout = ({ children }: Props) => {
+	const { user } = useUser();
+	return (
+		<PageContainer>
+			<Navbar username={user?.name || ''} avatar={user?.picture} />
+			{children}
+		</PageContainer>
+	);
+};
 
 export default Layout;
