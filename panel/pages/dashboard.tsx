@@ -23,12 +23,14 @@ const DashboardPage: NextPage = () => {
 			columns: [],
 			filterData: {},
 		},
+		refetch,
 		isFetching,
 		isSuccess,
 	} = api.useGetLogsQuery(queryOptions);
 
 	return isSuccess ? (
 		<Logs
+			refresh={refetch}
 			isLoading={isFetching}
 			{...data}
 			onFilterChange={(query: Query) =>

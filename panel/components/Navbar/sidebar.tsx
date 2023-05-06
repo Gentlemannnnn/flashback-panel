@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import AnnouncementIcon from '@mui/icons-material/Announcement';
 import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
@@ -27,79 +28,77 @@ const pages = [
 ];
 
 const Sidebar = () => (
-	<>
-		<Grid item xs={3}>
-			<Box
-				display={'flex'}
-				justifyContent={'center'}
-				textAlign={'match-parent'}
-				alignItems={'center'}
+	<Grid item xs={3}>
+		<Box
+			display="flex"
+			justifyContent="center"
+			textAlign="match-parent"
+			alignItems="center"
+			sx={{
+				background:
+					'linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.5) 100%), radial-gradient(circle, rgba(99,44,131,1) 0%, rgba(94,41,124,1) 16%, rgba(88,37,117,1) 43%, rgba(70,27,95,1) 69%, rgba(47,14,69,1) 100%)',
+			}}
+		>
+			<img
+				src="https://media.discordapp.net/attachments/1095382416828407880/1101236139639193620/detoure.png"
+				alt="logo"
+				width="25%"
+			/>
+
+			<Typography
 				sx={{
-					background:
-						'linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.5) 100%), radial-gradient(circle, rgba(99,44,131,1) 0%, rgba(94,41,124,1) 16%, rgba(88,37,117,1) 43%, rgba(70,27,95,1) 69%, rgba(47,14,69,1) 100%)',
+					fontWeight: '700 ',
+					fontFamily: 'monospace',
+					fontSize: '25px',
 				}}
 			>
-				<img
-					src="https://media.discordapp.net/attachments/1095382416828407880/1101236139639193620/detoure.png"
-					alt="logo"
-					width="25%"
-				></img>
+				FlashBackFa Logs
+			</Typography>
+		</Box>
 
-				<Typography
+		<Box>
+			{pages.map(page => (
+				<Button
+					key={page.title}
 					sx={{
-						fontWeight: '700 ',
-						fontFamily: 'monospace',
-						fontSize: '25px',
+						'my': 2,
+						'position': 'relative',
+						'fontFamily': 'monospace',
+						'fontWeight': 700,
+						'textDecoration': 'none',
+						'width': '90%',
+						'height': '3em',
+						'color': '#f0e9e9',
+						'justifyContent': 'left',
+						'alignItems': 'center',
+						'background':
+							'linear-gradient(90deg, rgb(255 255 255 / 5%) 0%, rgb(159 67 67 / 0%) 100%)',
+						'transition': 'all 0.3s ease-in',
+						'fontSize': '16px',
+						'margin': '1rem',
+						'&:hover': {
+							background: '#f0e9e9',
+							color: '#000000 ',
+							boxShadow: '0 0 50px #f0e9e9',
+						},
 					}}
+					href={page.href ? page.href : '#'}
 				>
-					FlashBackFa Logs
-				</Typography>
-			</Box>
-
-			<Box>
-				{pages.map(page => (
-					<Button
-						key={page.title}
-						sx={{
-							'my': 2,
-							'position': 'relative',
-							'fontFamily': 'monospace',
-							'fontWeight': 700,
-							'textDecoration': 'none',
-							'width': '90%',
-							'height': '3em',
-							'color': '#f0e9e9',
-							'justifyContent': 'left',
-							'alignItems': 'center',
-							'background':
-								'linear-gradient(90deg, rgb(255 255 255 / 5%) 0%, rgb(159 67 67 / 0%) 100%)',
-							'transition': 'all 0.3s ease-in',
-							'fontSize': '16px',
-							'margin': '1rem',
-							'&:hover': {
-								background: '#f0e9e9',
-								color: '#000000 ',
-								boxShadow: '0 0 50px #f0e9e9',
-							},
+					<span
+						className="icon"
+						style={{
+							marginRight: '2rem',
+							alignItems: 'center',
+							display: 'flex',
 						}}
-						href={page.href ? page.href : '#'}
 					>
-						<span
-							className="icon"
-							style={{
-								marginRight: '2rem',
-								alignItems: 'center',
-								display: 'flex',
-							}}
-						>
-							{page.icon}
-						</span>
-						{page.title}
-					</Button>
-				))}
-			</Box>
-		</Grid>
-	</>
+						{page.icon}
+					</span>
+					{page.title}
+				</Button>
+			))}
+		</Box>
+	</Grid>
 );
 
 export default Sidebar;

@@ -1,5 +1,6 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import { api } from './api';
+
 export function makeStore() {
 	return configureStore({
 		reducer: {
