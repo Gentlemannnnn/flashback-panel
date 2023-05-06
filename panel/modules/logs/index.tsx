@@ -1,4 +1,4 @@
-import React from 'react';
+/* eslint-disable react/react-in-jsx-scope */
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import Box from '@mui/material/Box';
 import {
@@ -8,12 +8,29 @@ import {
 	GridRenderCellParams,
 	GridSortItem,
 	GridSortModel,
-	GridToolbar,
+	GridToolbarColumnsButton,
+	GridToolbarContainer,
+	GridToolbarDensitySelector,
+	GridToolbarFilterButton,
 	GridValueGetterParams,
 } from '@mui/x-data-grid';
 import { Query, Sort } from 'types/query';
 import { determinComparator } from 'utils/dataTable';
 import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import RefreshIcon from '@mui/icons-material/Refresh';
+
+const CustomToolbar = ({ refresh }: { refresh: () => void }) => (
+	<GridToolbarContainer>
+		<GridToolbarColumnsButton />
+		<GridToolbarFilterButton />
+		<GridToolbarDensitySelector />
+		<Button onClick={refresh}>
+			Actualiser
+			<RefreshIcon />
+		</Button>
+	</GridToolbarContainer>
+);
 
 interface Props {
 	items: any[];
@@ -24,6 +41,7 @@ interface Props {
 	isLoading: boolean;
 	filterData?: { [key: string]: string[] };
 	columns?: string[];
+	refresh: () => void;
 }
 
 const Logs = ({
@@ -35,6 +53,7 @@ const Logs = ({
 	isLoading,
 	filterData,
 	columns: extraColumns = [],
+	refresh,
 }: Props) => {
 	const columns: GridColDef[] = [
 		{
@@ -128,9 +147,10 @@ const Logs = ({
 						},
 					},
 				}}
-				slots={{
-					toolbar: GridToolbar,
+				components={{
+					Toolbar: CustomToolbar,
 				}}
+				componentsProps={{ toolbar: { refresh } }}
 				localeText={{
 					toolbarFilters: 'Filtres',
 					toolbarFiltersLabel: 'Filtres',
