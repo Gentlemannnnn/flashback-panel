@@ -4,7 +4,8 @@
 .MuiDataGrid-selectedRowCount,
 .MuiToolbar-root,
 .MuiToolbar-gutters,
-.MuiToolbar-gutters {
+.MuiToolbar-gutters,
+.MuiDataGrid-toolbarContainer {
   font-family: 'Montserrat', sans-serif !important;
   font-weight: 700 !important;
 
@@ -58,10 +59,9 @@ body {
   background: linear-gradient(45deg, #8c1db3, #c128e4);
 }
 
-.MuiDataGrid-root--densityStandard,
-::-webkit-scrollbar-horizontal {
+.MuiDataGrid-root--densityStandard {
   width: 90rem;
-  height: 55.94rem !important;
+  height: 53rem !important;
 }
 
 .MuiDataGrid-row:nth-child(even) {

@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import AnnouncementIcon from '@mui/icons-material/Announcement';
 import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';

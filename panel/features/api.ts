@@ -90,3 +90,4 @@ export const api = createApi({
 		}),
 	}),
 });
+export { fetchBaseQuery };

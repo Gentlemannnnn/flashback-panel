@@ -24,7 +24,7 @@ const Navbar = ({ username, avatar }: Props) => (
 						filter: 'drop-shadow(0px 0px 9px #18c71b)',
 					}}
 				>
-					Connecté
+					Statuts connecté
 					<RadioButtonCheckedIcon
 						sx={{
 							background: 'transparent',
