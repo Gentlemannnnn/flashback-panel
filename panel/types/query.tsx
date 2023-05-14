@@ -14,3 +14,12 @@ export interface Query {
 	page?: number;
 	pageSize?: number;
 }
+
+export interface Webhooks {
+	id: string;
+	name: string;
+	url: string;
+	action: string;
+	fromId: string;
+	toId: string;
+}

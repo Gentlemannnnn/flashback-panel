@@ -8,7 +8,7 @@
 			"expose_headers": ["Content-Length", "Content-Type"],
 			"allow_headers": ["Accept-Language", "Authorization", "Content-Type"],
 			"max_age": "12h",
-			"allow_methods": ["GET", "HEAD", "POST", "PUT", "OPTIONS"]
+			"allow_methods": ["GET", "HEAD", "POST", "PUT", "OPTIONS", "DELETE"]
 		}
 	},
 	"timeout": "10000ms",
@@ -40,6 +40,59 @@
 						"collection": "items"
 					},
 					"url_pattern": "/logs",
+					"host": ["{{env "LOGS_SERVICE_URI"}}"],
+					"encoding": "no-op"
+				}
+			]
+		},
+		{
+			"endpoint": "/webhooks",
+			"method": "POST",
+			"output_encoding": "no-op",
+			"backend": [
+				{
+					"url_pattern": "/webhooks",
+					"host": ["{{env "LOGS_SERVICE_URI"}}"],
+					"encoding": "no-op"
+				}
+			]
+		},
+		{
+			"endpoint": "/webhooks",
+			"method": "GET",
+			"output_encoding": "no-op",
+			"input_query_strings": ["*"],
+			"backend": [
+				{
+					"is_collection": true,
+					"mapping": {
+						"collection": "items"
+					},
+					"url_pattern": "/webhooks",
+					"host": ["{{env "LOGS_SERVICE_URI"}}"],
+					"encoding": "no-op"
+				}
+			]
+		},
+		{
+			"endpoint": "/webhooks/{webhookId}",
+			"method": "PUT",
+			"output_encoding": "no-op",
+			"backend": [
+				{
+					"url_pattern": "/webhooks/{webhookId}",
+					"host": ["{{env "LOGS_SERVICE_URI"}}"],
+					"encoding": "no-op"
+				}
+			]
+		},
+		{
+			"endpoint": "/webhooks/{webhookId}",
+			"method": "DELETE",
+			"output_encoding": "no-op",
+			"backend": [
+				{
+					"url_pattern": "/webhooks/{webhookId}",
 					"host": ["{{env "LOGS_SERVICE_URI"}}"],
 					"encoding": "no-op"
 				}
